@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|d:\\kiet\u0027s folder\\code\\learning\\c#\\villaapi\\villaapi\\controllers\\villaapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|solutionrelative:villaapi\\controllers\\villaapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|d:\\kiet\u0027s folder\\code\\learning\\c#\\villaapi\\villaapi\\controllers\\villanumberapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|solutionrelative:villaapi\\controllers\\villanumberapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|d:\\kiet\u0027s folder\\code\\learning\\c#\\villaapi\\villaapi\\mappingconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|solutionrelative:villaapi\\mappingconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|d:\\kiet\u0027s folder\\code\\learning\\c#\\villaapi\\villaapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|solutionrelative:villaapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,23 +18,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Program.cs",
-              "RelativeDocumentMoniker": "VillaAPI\\Program.cs",
-              "ToolTip": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Program.cs",
-              "RelativeToolTip": "VillaAPI\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAA2AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-24T10:48:57.004Z"
             },
             {
               "$type": "Document",
@@ -48,22 +32,22 @@
               "RelativeDocumentMoniker": "VillaAPI\\MappingConfig.cs",
               "ToolTip": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\MappingConfig.cs",
               "RelativeToolTip": "VillaAPI\\MappingConfig.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwBQAAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-24T10:44:41.513Z",
+              "WhenOpened": "2024-03-25T17:41:55.111Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "VillaAPIController.cs",
-              "DocumentMoniker": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Controllers\\VillaAPIController.cs",
-              "RelativeDocumentMoniker": "VillaAPI\\Controllers\\VillaAPIController.cs",
-              "ToolTip": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Controllers\\VillaAPIController.cs",
-              "RelativeToolTip": "VillaAPI\\Controllers\\VillaAPIController.cs",
-              "ViewState": "AQIAACkAAAAAAAAAAAAgwDwAAAAnAAAA",
+              "Title": "VillaNumberAPIController.cs",
+              "DocumentMoniker": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Controllers\\VillaNumberAPIController.cs",
+              "RelativeDocumentMoniker": "VillaAPI\\Controllers\\VillaNumberAPIController.cs",
+              "ToolTip": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Controllers\\VillaNumberAPIController.cs",
+              "RelativeToolTip": "VillaAPI\\Controllers\\VillaNumberAPIController.cs",
+              "ViewState": "AQIAAHYAAAAAAAAAAAAkwD0AAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-24T09:52:59.581Z",
+              "WhenOpened": "2024-03-25T17:17:55.342Z",
               "EditorCaption": ""
             }
           ]
