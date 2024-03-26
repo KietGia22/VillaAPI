@@ -31,7 +31,7 @@ namespace VillaAPI.Controllers
         {
             try
             {
-                IEnumerable<VillaNumber> villaNumbers = await _dbVillaNumber.GetAllAsync();
+                IEnumerable<VillaNumber> villaNumbers = await _dbVillaNumber.GetAllAsync(includeProperty:"Villa");
                 _response.StatusCode = HttpStatusCode.OK;
                 _response.Result = _mapper.Map<List<VillaNumberDTO>>(villaNumbers);
                 return Ok(_response);
@@ -87,13 +87,13 @@ namespace VillaAPI.Controllers
 
                 if (await _dbVillaNumber.GetAsync(u => u.VillaNo == createDTO.VillaNo) != null)
                 {
-                    ModelState.AddModelError("CustomError", "Villa Number already Exists!");
+                    ModelState.AddModelError("ErrorMessage", "Villa Number already Exists!");
                     return BadRequest(ModelState);
                 }
 
                 if(await _dbVilla.GetAsync(u => u.Id == createDTO.VillaID) == null)
                 {
-                    ModelState.AddModelError("CustomError", "Villa ID is Invalid!");
+                    ModelState.AddModelError("ErrorMessage", "Villa ID is Invalid!");
                     return BadRequest(ModelState);
                 }
 
@@ -160,6 +160,10 @@ namespace VillaAPI.Controllers
                 if (updateDTO == null || id != updateDTO.VillaNo)
                 {
                     return BadRequest();
+                }
+                if (await _dbVilla.GetAsync(u => u.Id == updateDTO.VillaID) == null)
+                {
+                    ModelState.AddModelError("ErrorMessage", "Villa ID is Invalid!");
                 }
 
                 VillaNumber model = _mapper.Map<VillaNumber>(updateDTO);

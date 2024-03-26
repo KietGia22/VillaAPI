@@ -77,7 +77,7 @@ namespace VillaAPI.Controllers
                 _response.IsSuccess = false;
                 _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
-            return Ok(_response);
+            return _response;
         }
 
         [HttpPost]
@@ -117,7 +117,7 @@ namespace VillaAPI.Controllers
             {
                 if (await _dbVilla.GetAsync(u => u.Name.ToLower() == createDTO.Name.ToLower()) != null)
                 {
-                    ModelState.AddModelError("CustomError", "Villa already Exists!");
+                    ModelState.AddModelError("ErrorMessage", "Villa already Exists!");
                     return BadRequest(ModelState);
                 }
 
@@ -185,7 +185,7 @@ namespace VillaAPI.Controllers
         [HttpPut("{id:int}", Name = "UpdateVilla")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateVilla(int id, [FromBody] VillaUpdateDTO updateDTO)
+        public async Task<ActionResult<APIResponse>> UpdateVilla(int id, [FromBody] VillaUpdateDTO updateDTO)
         {
             //if (updateDTO == null || id != updateDTO.Id)
             //{
@@ -223,7 +223,7 @@ namespace VillaAPI.Controllers
                 _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
             }
-            return Ok(_response);   
+            return _response;   
         }
 
         [HttpPatch("{id:int}", Name = "UpdatePartialVilla")]
