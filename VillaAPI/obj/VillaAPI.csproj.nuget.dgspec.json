@@ -80,14 +80,6 @@
               "target": "Package",
               "version": "[8.0.3, )"
             },
-            "Microsoft.IdentityModel": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Microsoft.IdentityModel.Tokens": {
-              "target": "Package",
-              "version": "[7.4.1, )"
-            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
