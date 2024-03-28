@@ -1,17 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VillaAPI.Models;
 using VillaAPI.Models.DTO;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace VillaAPI.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
              : base(options)
         {
         }
-
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<LocalUser> LocalUsers { get; set; }
         public DbSet<Villa> Villas { get; set; }
         public DbSet<VillaNumber> VillaNumbers { get; set; }

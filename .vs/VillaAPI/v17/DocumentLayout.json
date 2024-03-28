@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|d:\\kiet\u0027s folder\\code\\learning\\c#\\villaapi\\villaapi\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|solutionrelative:villaapi\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|d:\\kiet\u0027s folder\\code\\learning\\c#\\villaapi\\villaapi\\controllers\\villaapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|solutionrelative:villaapi\\controllers\\villaapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|d:\\kiet\u0027s folder\\code\\learning\\c#\\villaapi\\villaapi\\controllers\\villanumberapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|solutionrelative:villaapi\\controllers\\villanumberapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|d:\\kiet\u0027s folder\\code\\learning\\c#\\villaapi\\villaapi\\repository\\irepository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|solutionrelative:villaapi\\repository\\irepository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|d:\\kiet\u0027s folder\\code\\learning\\c#\\villaapi\\villaapi\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{183D229D-F0E5-4E74-800E-217E64EEB8CC}|VillaAPI\\VillaAPI.csproj|solutionrelative:villaapi\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,15 +39,63 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Repository\\UserRepository.cs",
+              "RelativeDocumentMoniker": "VillaAPI\\Repository\\UserRepository.cs",
+              "ToolTip": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Repository\\UserRepository.cs",
+              "RelativeToolTip": "VillaAPI\\Repository\\UserRepository.cs",
+              "ViewState": "AQIAAFwAAAAAAAAAAAAkwG8AAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-28T07:02:51.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "VillaNumberAPIController.cs",
               "DocumentMoniker": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Controllers\\VillaNumberAPIController.cs",
               "RelativeDocumentMoniker": "VillaAPI\\Controllers\\VillaNumberAPIController.cs",
               "ToolTip": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Controllers\\VillaNumberAPIController.cs",
               "RelativeToolTip": "VillaAPI\\Controllers\\VillaNumberAPIController.cs",
-              "ViewState": "AQIAAEQAAAAAAAAAAAAgwFAAAAAkAAAA",
+              "ViewState": "AQIAAJYAAAAAAAAAAAAowKEAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-26T19:51:59.986Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-28T06:59:22.673Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "VillaAPIController.cs",
+              "DocumentMoniker": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Controllers\\VillaAPIController.cs",
+              "RelativeDocumentMoniker": "VillaAPI\\Controllers\\VillaAPIController.cs",
+              "ToolTip": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Controllers\\VillaAPIController.cs",
+              "RelativeToolTip": "VillaAPI\\Controllers\\VillaAPIController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACQAAABsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-28T06:57:03.394Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Repository\\Repository.cs",
+              "RelativeDocumentMoniker": "VillaAPI\\Repository\\Repository.cs",
+              "ToolTip": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Repository\\Repository.cs",
+              "RelativeToolTip": "VillaAPI\\Repository\\Repository.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAA1wB0AAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-28T06:57:01.19Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Repository\\IRepository\\IRepository.cs",
+              "RelativeDocumentMoniker": "VillaAPI\\Repository\\IRepository\\IRepository.cs",
+              "ToolTip": "D:\\KIET\u0027s Folder\\CODE\\Learning\\C#\\VillaAPI\\VillaAPI\\Repository\\IRepository\\IRepository.cs",
+              "RelativeToolTip": "VillaAPI\\Repository\\IRepository\\IRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAB8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-28T06:56:59.89Z"
             }
           ]
         }
