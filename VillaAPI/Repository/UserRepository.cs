@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -79,7 +80,7 @@ namespace VillaAPI.Repository
                 User = _mapper.Map<UserDTO>(user),
             };
             return loginResponseDTO;
-        }
+        } 
 
         public async Task<UserDTO> Register(RegisterationRequestDTO registerationRequestDTO)
         {
@@ -108,7 +109,16 @@ namespace VillaAPI.Repository
                         await _roleManage.CreateAsync(new IdentityRole("admin"));
                         await _roleManage.CreateAsync(new IdentityRole("customer"));
                     }
-                    await _userManager.AddToRoleAsync(user, "admin");
+                    var IsFirstUser = await _db.ApplicationUsers.CountAsync();
+                    if(IsFirstUser > 1)
+                    {
+                        Console.WriteLine(IsFirstUser);
+                        await _userManager.AddToRoleAsync(user, "customer");
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "admin");
+                    }
                     var userToReturn = _db.ApplicationUsers.FirstOrDefault(
                             u => u.UserName == registerationRequestDTO.UserName
                         );
