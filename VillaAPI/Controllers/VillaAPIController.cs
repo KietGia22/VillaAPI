@@ -10,6 +10,11 @@ using VillaAPI.Repository.IRepository;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using System.Text.Json;
+using CloudinaryDotNet.Actions;
+using CloudinaryDotNet;
+using dotenv.net;
+using VillaAPI.Service;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace VillaAPI.Controllers
 {
@@ -21,10 +26,12 @@ namespace VillaAPI.Controllers
         protected APIResponse _response;
         private readonly IVillaRepository _dbVilla;
         private readonly IMapper _mapper;
-        public VillaAPIController(IVillaRepository dbVilla, IMapper mapper)
+        private readonly IPhotoService _photoService;
+        public VillaAPIController(IVillaRepository dbVilla, IMapper mapper, IPhotoService photoService)
         {
             _dbVilla = dbVilla;
             _mapper = mapper;
+            _photoService = photoService;
             this._response = new();
         }
 
@@ -111,33 +118,6 @@ namespace VillaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> CreateVilla([FromBody] VillaCreateDTO createDTO)
         {
-            //if (await _dbVilla.GetAsync(u => u.Name.ToLower() == createDTO.Name.ToLower()) != null)
-            //{
-            //    ModelState.AddModelError("CustomError", "Villa already Exists!");
-            //    return BadRequest(ModelState);
-            //}
-
-            //if (createDTO == null)
-            //{
-            //    return BadRequest(createDTO);
-            //}
-
-            //Villa model = _mapper.Map<Villa>(createDTO);
-
-            ////Villa model = new()
-            ////{
-            ////    Amenity = villaDTO.Amenity,
-            ////    Details = villaDTO.Details,
-            ////    ImageUrl = villaDTO.ImageUrl,
-            ////    Name = villaDTO.Name,
-            ////    Occupancy = villaDTO.Occupancy,
-            ////    Rate = villaDTO.Rate,
-            ////    Sqft = villaDTO.Sqft
-            ////};
-            ////await _db.Villas.AddAsync(model);
-            ////await _db.SaveChangesAsync();
-            //await _dbVilla.CreateAsync(model);
-            //return CreatedAtRoute("GetVilla", new { id = model.Id }, model);
             try
             {
                 if (await _dbVilla.GetAsync(u => u.Name.ToLower() == createDTO.Name.ToLower()) != null)
@@ -151,7 +131,21 @@ namespace VillaAPI.Controllers
                     return BadRequest(createDTO);
                 }
 
-                Villa villa = _mapper.Map<Villa>(createDTO);
+                var result = await _photoService.AddPhotoAsync(createDTO.ImageUrl);
+
+                Console.WriteLine(result.SecureUrl.GetType());
+
+                //Villa villa = _mapper.Map<Villa>(createDTO);
+                Villa villa = new()
+                {
+                    Name = createDTO.Name,
+                    Amenity = createDTO.Amenity,
+                    Details = createDTO.Details,
+                    Occupancy = createDTO.Occupancy,
+                    Sqft = createDTO.Sqft,
+                    Rate = createDTO.Rate,
+                    //ImageUrl = (string) result.SecureUrl
+                };
                 await _dbVilla.CreateAsync(villa);
                 _response.Result = _mapper.Map<VillaDTO>(villa);
                 _response.StatusCode = HttpStatusCode.Created;
@@ -256,6 +250,7 @@ namespace VillaAPI.Controllers
             return _response;   
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPatch("{id:int}", Name = "UpdatePartialVilla")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -302,6 +297,21 @@ namespace VillaAPI.Controllers
                 return BadRequest(ModelState);
             }
             return NoContent();
+        }
+
+        [HttpPost("{id:int}", Name = "UploadImageToCloudinary")]
+        //[Authorize(Roles = "admin")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public async Task<ActionResult<APIResponse>> UploadImage(IFormFile image)
+        {
+            var result = await _photoService.AddPhotoAsync(image);
+
+            Console.WriteLine(result.SecureUrl.GetType());
+
+            _response.Result = result.SecureUrl.ToString();
+            return _response;
+
         }
     }
 }

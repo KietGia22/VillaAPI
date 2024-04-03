@@ -146,3 +146,5 @@ D:\KIET's Folder\CODE\Learning\C#\VillaAPI\VillaAPI\bin\Debug\net8.0\Microsoft.A
 D:\KIET's Folder\CODE\Learning\C#\VillaAPI\VillaAPI\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 D:\KIET's Folder\CODE\Learning\C#\VillaAPI\VillaAPI\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 D:\KIET's Folder\CODE\Learning\C#\VillaAPI\VillaAPI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\KIET's Folder\CODE\Learning\C#\VillaAPI\VillaAPI\bin\Debug\net8.0\CloudinaryDotNet.dll
+D:\KIET's Folder\CODE\Learning\C#\VillaAPI\VillaAPI\bin\Debug\net8.0\dotenv.net.dll

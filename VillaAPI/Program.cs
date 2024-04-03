@@ -10,6 +10,10 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using VillaAPI.Models;
 using Microsoft.AspNetCore.Identity;
+using dotenv.net;
+using CloudinaryDotNet;
+using VillaAPI.Config;
+using VillaAPI.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,10 +26,12 @@ builder.Services.AddResponseCaching();
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
 builder.Services.AddScoped<IVillaNumberRepository, VillaNumberRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
-Console.WriteLine(key);
+
+builder.Services.Configure<CloudinaryConfig>(builder.Configuration.GetSection("CloudinarySettings"));
 
 builder.Services.AddAuthentication(x =>
 {
@@ -82,6 +88,11 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+DotEnv.Load(options: new DotEnvOptions(probeForEnv: true));
+
+Cloudinary cloudinary = new Cloudinary(Environment.GetEnvironmentVariable("CLOUDINARY_URL"));
+cloudinary.Api.Secure = true;
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -91,6 +102,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseStaticFiles();   
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
