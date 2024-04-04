@@ -1,20 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
-using VillaAPI.Data;
 using VillaAPI.Models;
 using VillaAPI.Models.DTO;
 using VillaAPI.Repository.IRepository;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using System.Text.Json;
-using CloudinaryDotNet.Actions;
-using CloudinaryDotNet;
-using dotenv.net;
-using VillaAPI.Service;
-using static System.Net.Mime.MediaTypeNames;
+using VillaAPI.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace VillaAPI.Controllers
 {
@@ -27,12 +21,14 @@ namespace VillaAPI.Controllers
         private readonly IVillaRepository _dbVilla;
         private readonly IMapper _mapper;
         private readonly IPhotoService _photoService;
-        public VillaAPIController(IVillaRepository dbVilla, IMapper mapper, IPhotoService photoService)
+        private readonly ApplicationDbContext _db;
+        public VillaAPIController(IVillaRepository dbVilla, IMapper mapper, IPhotoService photoService, ApplicationDbContext db)
         {
             _dbVilla = dbVilla;
             _mapper = mapper;
             _photoService = photoService;
             this._response = new();
+            _db = db;
         }
 
         [HttpGet]
@@ -116,7 +112,7 @@ namespace VillaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<APIResponse>> CreateVilla([FromBody] VillaCreateDTO createDTO)
+        public async Task<ActionResult<APIResponse>> CreateVilla([FromForm] VillaCreateDTO createDTO, IFormFile ImageUrl)
         {
             try
             {
@@ -131,22 +127,21 @@ namespace VillaAPI.Controllers
                     return BadRequest(createDTO);
                 }
 
-                var result = await _photoService.AddPhotoAsync(createDTO.ImageUrl);
+                var result = await _photoService.AddPhotoAsync(ImageUrl);
 
                 Console.WriteLine(result.SecureUrl.GetType());
 
-                //Villa villa = _mapper.Map<Villa>(createDTO);
-                Villa villa = new()
-                {
-                    Name = createDTO.Name,
-                    Amenity = createDTO.Amenity,
-                    Details = createDTO.Details,
-                    Occupancy = createDTO.Occupancy,
-                    Sqft = createDTO.Sqft,
-                    Rate = createDTO.Rate,
-                    //ImageUrl = (string) result.SecureUrl
-                };
+                Villa villa = _mapper.Map<Villa>(createDTO);
                 await _dbVilla.CreateAsync(villa);
+
+                Photo photo = new()
+                {
+                    villa_id = villa.Id,
+                    ImageUrl = result.SecureUrl.ToString(),
+                };
+
+                await _photoService.CreateAsync(photo);
+
                 _response.Result = _mapper.Map<VillaDTO>(villa);
                 _response.StatusCode = HttpStatusCode.Created;
                 return CreatedAtRoute("GetVilla", new { id = villa.Id }, villa);
@@ -169,17 +164,6 @@ namespace VillaAPI.Controllers
         [Authorize(Roles = "admin")]
         public async Task<ActionResult<APIResponse>> DeleteVilla(int id)
         {
-            //if (id == 0)
-            //{
-            //    return BadRequest();
-            //}
-            //var villa = await _dbVilla.GetAsync(u => u.Id == id);
-            //if (villa == null)
-            //{
-            //    return NotFound();
-            //}
-            //await _dbVilla.RemoveAsync(villa);
-            //return NoContent();
             try
             {
                 if (id == 0)
@@ -191,6 +175,17 @@ namespace VillaAPI.Controllers
                 {
                     return NotFound();
                 }
+
+                var photo = await _db.Photos.FirstOrDefaultAsync(u => u.villa_id == id);
+
+                if (photo != null)
+                {
+                    // Nếu không null, gọi phương thức RemoveAsync
+                    _db.Photos.Remove(photo);
+                    await _db.SaveChangesAsync();
+                }
+
+                // Sau đó xóa villa
                 await _dbVilla.RemoveAsync(villa);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
@@ -211,24 +206,6 @@ namespace VillaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponse>> UpdateVilla(int id, [FromBody] VillaUpdateDTO updateDTO)
         {
-            //if (updateDTO == null || id != updateDTO.Id)
-            //{
-            //    return BadRequest();
-            //}
-            //Villa model  = _mapper.Map<Villa>(updateDTO);
-            ////Villa model = new()
-            ////{
-            ////    Amenity = villaDTO.Amenity,
-            ////    Details = villaDTO.Details,
-            ////    Id = villaDTO.Id,
-            ////    ImageUrl = villaDTO.ImageUrl,
-            ////    Name = villaDTO.Name,
-            ////    Occupancy = villaDTO.Occupancy,
-            ////    Rate = villaDTO.Rate,
-            ////    Sqft = villaDTO.Sqft
-            ////};
-            //await _dbVilla.UpdateAsync(model);
-            //return NoContent();
             try
             {
                 if (updateDTO == null || id != updateDTO.Id)
@@ -261,35 +238,13 @@ namespace VillaAPI.Controllers
                 return BadRequest();
             }
             var villa = await _dbVilla.GetAsync(u => u.Id == id, tracked: false);
-
-            //VillaUpdateDTO villaDTO = new()
-            //{
-            //    Amenity = villa.Amenity,
-            //    Details = villa.Details,
-            //    Id = villa.Id,
-            //    ImageUrl = villa.ImageUrl,
-            //    Name = villa.Name,
-            //    Occupancy = villa.Occupancy,
-            //    Rate = villa.Rate,
-            //    Sqft = villa.Sqft
-            //};
             VillaUpdateDTO villaDTO = _mapper.Map<VillaUpdateDTO>(villa);
             if (villa == null)
             {
                 return BadRequest();
             }
             patchDTO.ApplyTo(villaDTO, ModelState);
-            //Villa model = new Villa()
-            //{
-            //    Amenity = villaDTO.Amenity,
-            //    Details = villaDTO.Details,
-            //    Id = villaDTO.Id,
-            //    ImageUrl = villaDTO.ImageUrl,
-            //    Name = villaDTO.Name,
-            //    Occupancy = villaDTO.Occupancy,
-            //    Rate = villaDTO.Rate,
-            //    Sqft = villaDTO.Sqft
-            //};
+
             Villa model = _mapper.Map<Villa>(villaDTO);
             await _dbVilla.UpdateAsync(model);
             if (!ModelState.IsValid)
@@ -299,19 +254,36 @@ namespace VillaAPI.Controllers
             return NoContent();
         }
 
-        [HttpPost("{id:int}", Name = "UploadImageToCloudinary")]
-        //[Authorize(Roles = "admin")]
+        [HttpPost("{id:int}", Name = "UpdateImage")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<APIResponse>> UploadImage(IFormFile image)
+        public async Task<ActionResult<APIResponse>> UpdateImage(IFormFile image, int id)
         {
-            var result = await _photoService.AddPhotoAsync(image);
+            try
+            {
+                var result = await _photoService.AddPhotoAsync(image);
 
-            Console.WriteLine(result.SecureUrl.GetType());
+                var photo_of_villas = await _db.Photos.FirstOrDefaultAsync(u => u.villa_id == id);
 
-            _response.Result = result.SecureUrl.ToString();
+                if (photo_of_villas != null)
+                {
+                    photo_of_villas.ImageUrl = result.Url.ToString();
+                    _db.Entry(photo_of_villas).State = EntityState.Modified;
+                    await _db.SaveChangesAsync();
+                }
+
+                _response.StatusCode = HttpStatusCode.NoContent;
+                _response.IsSuccess = true;
+                _response.Result = photo_of_villas;
+                return Ok(_response);
+            } catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages
+                     = new List<string>() { ex.ToString() };
+            }
             return _response;
-
         }
     }
 }

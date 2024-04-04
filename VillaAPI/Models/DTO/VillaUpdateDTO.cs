@@ -17,7 +17,6 @@ namespace VillaAPI.Models.DTO
         [Required]
         public int Sqft { get; set; }
         [Required]
-        public IFormFile? ImageUrl { get; set; }
         public string Amenity { get; set; }
     }
 }
