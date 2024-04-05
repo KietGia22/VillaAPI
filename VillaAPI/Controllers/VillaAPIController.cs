@@ -180,12 +180,9 @@ namespace VillaAPI.Controllers
 
                 if (photo != null)
                 {
-                    // Nếu không null, gọi phương thức RemoveAsync
                     _db.Photos.Remove(photo);
                     await _db.SaveChangesAsync();
                 }
-
-                // Sau đó xóa villa
                 await _dbVilla.RemoveAsync(villa);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;

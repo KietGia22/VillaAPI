@@ -17,6 +17,7 @@ namespace VillaAPI.Data
         public DbSet<Villa> Villas { get; set; }
         public DbSet<VillaNumber> VillaNumbers { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<RefreshToken> refreshTokens { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
